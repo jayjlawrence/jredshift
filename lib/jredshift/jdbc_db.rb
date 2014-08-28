@@ -24,6 +24,8 @@ module Jredshift
       @error_occurred = false
       @retry_count = 0
 
+      validate_connection_credentials
+
       secrets = options.fetch(:secrets, [])
       @logger = Logger.new(:secrets => secrets)
 
@@ -90,6 +92,12 @@ module Jredshift
     end
 
     private
+
+    def validate_connection_credentials
+      fail ArgumentError, 'jdbc_url needs to be a string' unless @jdbc_url.is_a?(String)
+      fail ArgumentError, 'user needs to be a string' unless @user.is_a?(String)
+      fail ArgumentError, 'password needs to be a string' unless @password.is_a?(String)
+    end
 
     def init_connection
       Jdbc::Postgres.load_driver
