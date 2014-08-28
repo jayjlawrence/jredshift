@@ -1,6 +1,5 @@
 require 'singleton'
 require 'time'
-require 'copperlight/time_util'
 
 
 module Jredshift
