@@ -23,10 +23,11 @@ module Jredshift
       @password = password
       @error_occurred = false
       @retry_count = 0
-      init_connection
 
       secrets = options.fetch(:secrets, [])
       @logger = Logger.new(:secrets => secrets)
+
+      init_connection
     end
 
     def execute(sql, options={})
