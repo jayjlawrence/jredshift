@@ -32,14 +32,14 @@ module Jredshift
 
     def drop_table_if_exists(table, options={})
       cascade = options.fetch(:cascade, false) ? ' CASCADE' : ''
-      err_msg = "ERROR: table \"#{remove_schema(table)}\" does not exist"
+      err_msg = "ERROR: Table \"#{remove_schema(table)}\" does not exist"
 
       execute("DROP TABLE #{table}#{cascade};", :quiet => true, :errors_to_ignore => [err_msg])
     end
 
     def drop_view_if_exists(view, options={})
       cascade = options.fetch(:cascade, false) ? ' CASCADE' : ''
-      err_msg = "ERROR: view \"#{remove_schema(view)}\" does not exist"
+      err_msg = "ERROR: View \"#{remove_schema(view)}\" does not exist"
 
       execute("DROP VIEW #{view}#{cascade};", :quiet => true, :errors_to_ignore => [err_msg])
     end

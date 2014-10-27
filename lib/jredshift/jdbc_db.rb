@@ -115,7 +115,7 @@ module Jredshift
       return_value
 
     rescue Exception => e
-      if errors_to_ignore.include?(e.message)
+      if should_ignore_error?(e.message, errors_to_ignore)
         @retry_count = 0
 
       elsif interpretable_error?(e.message)
@@ -139,6 +139,10 @@ module Jredshift
 
         raise e if @abort_on_error
       end
+    end
+
+    def should_ignore_error?(err_msg, errors_to_ignore)
+      errors_to_ignore.map {|err| err.downcase }.include?(err_msg.downcase)
     end
 
     def interpretable_error?(err_msg)
