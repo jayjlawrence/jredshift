@@ -1,5 +1,6 @@
 require 'singleton'
 require 'time'
+require 'date'
 
 
 module Jredshift
